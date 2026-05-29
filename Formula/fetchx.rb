@@ -8,15 +8,21 @@ class Fetchx < Formula
   revision 1
 
   depends_on "cmake" => :build
-  depends_on "openssl@3" => :build
+  depends_on "openssl@3"
 
   conflicts_with "fetch", because: "both install a fetch executable"
 
   def install
+    openssl = Formula["openssl@3"]
+
+    inreplace "program/CMakeLists.txt" do |s|
+      s.gsub! "set (libssl ssl)", "set (libssl #{openssl.opt_lib/shared_library("libssl")})"
+      s.gsub! "set (libcrypto crypto)", "set (libcrypto #{openssl.opt_lib/shared_library("libcrypto")})"
+      s.gsub! 'set (incssl "")', "set (incssl #{openssl.opt_include})"
+    end
+
     system "cmake", ".", *std_cmake_args,
-           "-DUSE_SYSTEM_SSL=ON",
-           "-DOPENSSL_USE_STATIC_LIBS=ON",
-           "-DOPENSSL_ROOT_DIR=#{Formula["openssl@3"].opt_prefix}"
+           "-DUSE_SYSTEM_SSL=ON"
 
     system "make"
     bin.install "program/fetchx" => "fetch"
