@@ -2,6 +2,13 @@
 
 Homebrew tap for the portable FreeBSD `fetch` utility.
 
+## Upstream
+
+This tap packages [`jrmarino/fetch-freebsd`](https://github.com/jrmarino/fetch-freebsd).
+The formula uses tagged archives from the
+[`laamalif/fetch-freebsd`](https://github.com/laamalif/fetch-freebsd) fork so
+Homebrew can install reproducible versioned releases.
+
 ## Install
 
 ```sh
