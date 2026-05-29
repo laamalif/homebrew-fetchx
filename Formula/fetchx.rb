@@ -5,6 +5,7 @@ class Fetchx < Formula
   url "https://github.com/laamalif/fetch-freebsd/archive/refs/tags/v14.0.tar.gz"
   sha256 "65ecbde279030d5ad7907a31cecae8a67a0b39db0bfda69f51e59b83fb945d50"
   license all_of: ["BSD-2-Clause", "BSD-3-Clause"]
+  revision 1
 
   depends_on "cmake" => :build
   depends_on "openssl@3" => :build
